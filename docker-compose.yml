@@ -1,0 +1,8 @@
+services:
+  bookify.api:
+    image: bookifyapi
+    build:
+      context: .
+      dockerfile: Bookify.Api/Dockerfile
+    ports:
+      - "5000:80"
