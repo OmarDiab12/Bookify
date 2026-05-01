@@ -34,34 +34,34 @@ namespace Bookify.Api.Extensions
                     CleaningFeeAmount = faker.Random.Decimal(25, 200),
                     CleaningFeeCurrency = "USD",
                     Amenities = JsonSerializer.Serialize(new List<int>
-    {
-        (int)Amenity.Parking,
-        (int)Amenity.MountainView
-    }),
+                    {
+                        (int)Amenity.Parking,
+                        (int)Amenity.MountainView
+                    }),
                     LastBookedOn = new DateTime(1753, 1, 1),
                     version = 1
                 });
             }
 
             const string sql = @"
-INSERT INTO dbo.apartments
-(
-    id, [name], description,
-    address_country, address_state, address_zip_code,
-    address_city, address_street,
-    price_amount, price_currency,
-    cleaning_fee_amount, cleaning_fee_currency,
-    amenities, last_booked_on_utc
-)
-VALUES
-(
-    @Id, @Name, @Description,
-    @Country, @State, @ZipCode,
-    @City, @Street,
-    @PriceAmount, @PriceCurrency,
-    @CleaningFeeAmount, @CleaningFeeCurrency,
-    @Amenities, @LastBookedOn
-)";
+                                INSERT INTO dbo.apartments
+                                (
+                                    id, [name], description,
+                                    address_country, address_state, address_zip_code,
+                                    address_city, address_street,
+                                    price_amount, price_currency,
+                                    cleaning_fee_amount, cleaning_fee_currency,
+                                    amenities, last_booked_on_utc
+                                )
+                                VALUES
+                                (
+                                    @Id, @Name, @Description,
+                                    @Country, @State, @ZipCode,
+                                    @City, @Street,
+                                    @PriceAmount, @PriceCurrency,
+                                    @CleaningFeeAmount, @CleaningFeeCurrency,
+                                    @Amenities, @LastBookedOn
+                                )";
 
             connection.Execute(sql, apartments);
         }
