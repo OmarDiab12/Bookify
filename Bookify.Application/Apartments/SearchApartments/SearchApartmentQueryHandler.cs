@@ -27,17 +27,34 @@ internal sealed class SearchApartmentQueryHandler : IQueryHandler<SearchAparment
         if (request.StartDate > request.EndDate) return new List<ApartmentResponse>();
         
         using var connection = _sqlConnectionFactory.CreateConnection();
-        const string sql = @"Select a.id AS Id, a.address_country as Country From Apartments AS a ";
-        
-        var apartments = await connection.QueryAsync<ApartmentResponse, AddressResponse, ApartmentResponse>(sql, (apartment, address) =>
+        const string sql = @"
+SELECT 
+    a.id AS Id,
+    a.name AS Name,
+    a.description AS Description,
+    a.price_amount AS Price,
+    a.price_currency AS Currency,
+
+    a.address_country AS Country,
+    a.address_state AS State,
+    a.address_city AS City,
+    a.address_zip_code AS ZipCode,
+    a.address_street AS Street
+
+FROM Apartments a
+";
+
+        var apartments = await connection.QueryAsync<
+            ApartmentResponse,
+            AddressResponse,
+            ApartmentResponse>(
+        sql,
+        (apartment, address) =>
         {
             apartment.Address = address;
             return apartment;
         },
-        new
-        {
-            request.StartDate, request.EndDate, ActiveBookingStatuses
-        },splitOn: "Country");
+        splitOn: "Country");
 
         return apartments.ToList();
 

@@ -18,11 +18,13 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.ApplyMigration();
-    app.SeedData();
+    //app.ApplyMigration();
+    //app.SeedData();
 }
 
 app.UseHttpsRedirection();
+
+app.UseCustomeExceptionHandling();
 
 app.MapControllers(); 
 
