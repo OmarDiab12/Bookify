@@ -1,9 +1,9 @@
-﻿using Bookify.Application.Users;
+﻿using Bookify.Application.Users.GetLoggedInUser;
 using Bookify.Application.Users.Login;
 using Bookify.Application.Users.Register;
+using Bookify.Infrastructure.Authorization;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bookify.Api.Controllers.Users
