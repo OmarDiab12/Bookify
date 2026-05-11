@@ -1,5 +1,4 @@
-﻿using System.Data;
-using Bookify.Application.Abstractions.Clock;
+﻿using Bookify.Application.Abstractions.Clock;
 using Bookify.Application.Abstractions.Messaging;
 using Bookify.Application.Exceptions;
 using Bookify.Domain.Abstractions;
@@ -37,7 +36,7 @@ public sealed class ReserveBookingCommandHandler : ICommandHandler<ReserveBookin
 
         if (user is  null)
         {
-            return Result.Failure<Guid>(UserErrors.NotFound);
+            return Result.Failure<Guid>(Domain.User.UserErrors.NotFound);
         }
 
         Apartment? apartment = await _apartmentRepository.GetByIdAsync(request.ApartmentId, cancellationToken);

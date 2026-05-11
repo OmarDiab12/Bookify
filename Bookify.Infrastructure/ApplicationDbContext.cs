@@ -43,6 +43,7 @@ public sealed class ApplicationDbContext : DbContext, IUnitOfWork
             return domainEvents;
         })
             .ToList();
+
         foreach (var domainEvent in domainEvents)
         {
             await _publisher.Publish(domainEvent);

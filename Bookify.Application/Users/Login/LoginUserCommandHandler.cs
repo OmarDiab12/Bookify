@@ -1,4 +1,5 @@
-﻿using Bookify.Application.Abstractions.Messaging;
+﻿using Bookify.Application.Abstractions.Authentication;
+using Bookify.Application.Abstractions.Messaging;
 using Bookify.Domain.Abstractions;
 using Bookify.Domain.User;
 
@@ -19,7 +20,7 @@ namespace Bookify.Application.Users.Login
                 return Result.Failure<AccessTokenResponse>(UserErrors.InvalidCredentials);
             }
 
-            return new AccessTokenResponse(result.value);
+            return new AccessTokenResponse(result.Value);
         }
     }
 }

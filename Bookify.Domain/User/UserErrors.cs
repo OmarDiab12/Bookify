@@ -1,9 +1,4 @@
 ﻿using Bookify.Domain.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bookify.Domain.User
 {
@@ -13,4 +8,4 @@ namespace Bookify.Domain.User
         public static Error InvalidCredentials = new("User.InvalidCredentials", "The provided credentials are invalid");
     }
 }
-}
+
