@@ -15,7 +15,7 @@ internal sealed class SqlConnectionFactory : ISqlConnectionFactory
     
     public IDbConnection CreateConnection()
     {
-        var connection = new SqlConnection(_connectionString);
+        SqlConnection connection = new(_connectionString);
         connection.Open();
         
         return connection;

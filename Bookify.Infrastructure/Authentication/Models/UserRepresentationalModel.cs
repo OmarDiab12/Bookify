@@ -1,4 +1,5 @@
 ﻿using Bookify.Domain.User;
+using System.Text.Json.Serialization;
 
 namespace Bookify.Infrastructure.Authentication.Models
 {
@@ -7,18 +8,19 @@ namespace Bookify.Infrastructure.Authentication.Models
         public Dictionary<string, string> Access { get; set; }
         public Dictionary<string, List<string>> Attributes { get; set; }
         public Dictionary<string, string> ClientRoles { get; set; }
-        public long? CreatedTimeStamp { get; set; }
+        public long? CreatedTimestamp { get; set; }
         public CredentialRepresentationalModel[] Credentials { get; set; }
-        public string[] DisabledCredentialTypes { get; set; }
+        public string[] disableableCredentialTypes { get; set; }
         public string Email { get; set; }
         public bool? EmailVerified { get; set; }
         public bool Enabled { get; set; }
-        public string FederationalLink { get; set; }
+        public string FederationLink { get; set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public string[] RequiredActions { get; private set; }
-        public string username { get; set; }
 
+        [JsonPropertyName("username")]
+        public string Username { get; set; }
         internal static UserRepresentationalModel FromUser(User user)
         {
             return new UserRepresentationalModel
@@ -26,10 +28,10 @@ namespace Bookify.Infrastructure.Authentication.Models
                 FirstName = user.FirstName.value,
                 LastName = user.LastName.value,
                 Email = user.Email.value,
-                username = user.Email.value,
+                Username = user.Email.value,
                 Enabled = true,
                 EmailVerified = true,
-                CreatedTimeStamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+                CreatedTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
                 Attributes = new Dictionary<string, List<string>>(),
                 RequiredActions = Array.Empty<string>()
 

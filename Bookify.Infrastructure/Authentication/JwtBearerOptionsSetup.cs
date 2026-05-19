@@ -9,6 +9,8 @@ namespace Bookify.Infrastructure.Authentication
 
         public void Configure(JwtBearerOptions options)
         {
+            options.MapInboundClaims = false;
+
             options.Audience = _authenticationOptions.Audience; 
             options.MetadataAddress = _authenticationOptions.MetaDataUrl;
             options.RequireHttpsMetadata = _authenticationOptions.RequireHttpsMetadata;

@@ -1,6 +1,9 @@
-﻿namespace Bookify.Application.Users.GetLoggedInUser
+﻿using FluentValidation;
+
+namespace Bookify.Application.Users.GetLoggedInUser
 {
-    public class GetLoggedInUserQueryValidator
+    public class GetLoggedInUserQueryValidator : AbstractValidator<GetLoggedInUserQuery>
     {
+        
     }
 }

@@ -28,21 +28,21 @@ internal sealed class SearchApartmentQueryHandler : IQueryHandler<SearchAparment
         
         using var connection = _sqlConnectionFactory.CreateConnection();
         const string sql = @"
-SELECT 
-    a.id AS Id,
-    a.name AS Name,
-    a.description AS Description,
-    a.price_amount AS Price,
-    a.price_currency AS Currency,
+                            SELECT 
+                                a.id AS Id,
+                                a.name AS Name,
+                                a.description AS Description,
+                                a.price_amount AS Price,
+                                a.price_currency AS Currency,
 
-    a.address_country AS Country,
-    a.address_state AS State,
-    a.address_city AS City,
-    a.address_zip_code AS ZipCode,
-    a.address_street AS Street
+                                a.address_country AS Country,
+                                a.address_state AS State,
+                                a.address_city AS City,
+                                a.address_zip_code AS ZipCode,
+                                a.address_street AS Street
 
-FROM Apartments a
-";
+                            FROM Apartments a
+                            ";
 
         var apartments = await connection.QueryAsync<
             ApartmentResponse,

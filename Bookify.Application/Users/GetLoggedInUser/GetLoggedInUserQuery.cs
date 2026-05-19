@@ -1,6 +1,8 @@
-﻿namespace Bookify.Application.Users.GetLoggedInUser
+﻿using Bookify.Application.Abstractions.Messaging;
+
+namespace Bookify.Application.Users.GetLoggedInUser
 {
-    public class GetLoggedInUserQuery
+    public class GetLoggedInUserQuery : IQuery<GetLoggedInUserResponse>
     {
     }
 }

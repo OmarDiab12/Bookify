@@ -5,14 +5,28 @@ namespace Bookify.Infrastructure.Authentication;
 
 internal static class ClaimsPrincipalExtensions
 {
-    public static Guid GetUserId(this ClaimsPrincipal principal)
+    //public static Guid GetUserId(this ClaimsPrincipal principal)
+    //{
+    //    var userID = principal.FindFirstValue(JwtRegisteredClaimNames.Sub);
+    //    return Guid.TryParse(userID, out Guid parsedUserId) ? parsedUserId : throw new ApplicationException("User ID not found.");
+    //}
+
+    //public static string GetIdentityId(this ClaimsPrincipal principal)
+    //{
+    //    return principal.FindFirstValue(ClaimTypes.NameIdentifier) ?? throw new ApplicationException("Identity ID not found.");
+    //}
+
+
+
+    public static string GetUserId(this ClaimsPrincipal principal)
     {
-        var userID = principal.FindFirstValue(JwtRegisteredClaimNames.Sub);
-        return Guid.TryParse(userID, out Guid parsedUserId) ? parsedUserId : throw new ApplicationException("User ID not found.");
+        return principal.FindFirstValue(JwtRegisteredClaimNames.Sub)
+               ?? throw new ApplicationException("User ID not found.");
     }
 
     public static string GetIdentityId(this ClaimsPrincipal principal)
     {
-        return principal.FindFirstValue(ClaimTypes.NameIdentifier) ?? throw new ApplicationException("Identity ID not found.");
+        return principal.FindFirstValue(JwtRegisteredClaimNames.Sub)
+               ?? throw new ApplicationException("Identity ID not found.");
     }
 }

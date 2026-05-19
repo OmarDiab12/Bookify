@@ -10,13 +10,9 @@ namespace Bookify.Api.Controllers.Users
 {
     [ApiController]
     [Route("api/Users")]
-    public class UsersController : ControllerBase
+    public class UsersController(ISender sender) : ControllerBase
     {
-        private readonly ISender _sender;
-        public UsersController(ISender sender)
-        {
-            _sender = sender;
-        }
+        private readonly ISender _sender = sender;
 
         [HttpGet("me")]
         [HasPermission(Permissions.UsersRead)]
@@ -49,7 +45,7 @@ namespace Bookify.Api.Controllers.Users
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginUserRequest request, CancellationToken cancellationToken)
         {
-            var command = new LoginUserCommand(request.Email, request.Password);
+            var command = new LoginUserCommand(request.Username, request.Password);
             var result = await _sender.Send(command, cancellationToken);
 
             if (result.IsFailure)

@@ -22,7 +22,7 @@ namespace Bookify.Infrastructure.Authentication
         }
 
         public async Task<Result<string>> GetAccessTokenAsync(
-            string email,
+            string Username,
             string password,
             CancellationToken cancellationToken = default)
         {
@@ -34,7 +34,7 @@ namespace Bookify.Infrastructure.Authentication
                     new("client_secret", _keycloakOptions.AuthClientSecret),
                     new("scope", "openid email"),
                     new("grant_type", "password"),
-                    new("username", email),
+                    new("username", Username),
                     new("password", password)
                 };
 
@@ -44,6 +44,8 @@ namespace Bookify.Infrastructure.Authentication
                     "",
                     authorizationRequestContent,
                     cancellationToken);
+
+                var content = await response.Content.ReadAsStringAsync();
 
                 response.EnsureSuccessStatusCode();
 

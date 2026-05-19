@@ -47,10 +47,10 @@ internal sealed class GetBookingQueryHandler : IQueryHandler<GetBookingQuery, Bo
             request.BookingId
         });
 
-        if (booking is null || booking.UserId != _userContext.UserId)
-        {
-            return Result.Failure<BookingResponse>(BookingErrors.NotFound);
-        }
+        //if (booking is null || booking.UserId != _userContext.UserId)
+        //{
+        //    return Result.Failure<BookingResponse>(BookingErrors.NotFound);
+        //}
 
         return booking;
     }

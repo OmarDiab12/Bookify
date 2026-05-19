@@ -20,7 +20,7 @@ internal sealed class AuthorizationService
                                 Id = u.Id,
                                 Roles = u.Roles.ToList()
                             })
-                                .FirstAsync();
+                                .FirstOrDefaultAsync();
 
         return roles;
     }
@@ -30,8 +30,8 @@ internal sealed class AuthorizationService
         var permissions = await _dbContext.Set<User>()
                                     .Where(u => u.IdentityId == identityId)
                                     .SelectMany(u => u.Roles.Select(r => r.Permissions))
-                                    .FirstAsync();
+                                    .FirstOrDefaultAsync();
 
-        return permissions.Select(p => p.Name).ToHashSet();
+        return permissions?.Select(p => p.Name).ToHashSet() ?? new HashSet<string>();
     }
 }

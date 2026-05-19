@@ -22,6 +22,9 @@ namespace Bookify.Infrastructure.Authentication
 
             var httpResponseMessage = await base.SendAsync(request, cancellationToken);
 
+            var responseContent = await httpResponseMessage.Content.ReadAsStringAsync();
+
+
             httpResponseMessage.EnsureSuccessStatusCode();
 
             return httpResponseMessage;
@@ -47,7 +50,7 @@ namespace Bookify.Infrastructure.Authentication
             };
 
             var authorizationResponse = await base.SendAsync(authorizationRequest, cancellationToken);
-
+            var content = await authorizationResponse.Content.ReadAsStringAsync();
             authorizationResponse.EnsureSuccessStatusCode();
 
             return await authorizationResponse.Content.ReadFromJsonAsync<AuthorizationToken>()

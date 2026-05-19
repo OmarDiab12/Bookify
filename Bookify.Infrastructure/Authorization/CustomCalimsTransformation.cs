@@ -37,11 +37,13 @@ namespace Bookify.Infrastructure.Authorization
 
             var claimsIdentity = new ClaimsIdentity();
 
-            claimsIdentity.AddClaim(new Claim(JwtRegisteredClaimNames.Sub, userRoles.Id.ToString()));
-
-            foreach (var role in userRoles.Roles)
+            if (userRoles != null)
             {
-                claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, role.Name));
+                claimsIdentity.AddClaim(new Claim(JwtRegisteredClaimNames.Sub, userRoles.Id.ToString()));
+                foreach (var role in userRoles.Roles)
+                {
+                    claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, role.Name));
+                }
             }
 
             principal.AddIdentity(claimsIdentity);
