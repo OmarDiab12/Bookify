@@ -1,6 +1,4 @@
 ﻿namespace Bookify.Domain.Reviews
 {
-    public class Rating
-    {
-    }
+    public record Rating(string value);
 }

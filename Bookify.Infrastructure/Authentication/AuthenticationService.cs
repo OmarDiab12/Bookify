@@ -1,16 +1,19 @@
 ﻿using Bookify.Domain.User;
-using System.Net.Http.Json;
 using Bookify.Infrastructure.Authentication.Models;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
 namespace Bookify.Application.Abstractions.Authentication
 {
     internal class AuthenticationService : IAuthenticationService
     {
         private const string PasswordCredentialType = "password";
         private readonly HttpClient _httpClient;
+        private readonly IJwtService _jwtService;
 
-        public AuthenticationService(HttpClient httpClient)
+        public AuthenticationService(HttpClient httpClient, IJwtService jwtService)
         {
             _httpClient = httpClient;
+            _jwtService = jwtService;
         }
         public async Task<string> RegisterAsync(User user, string password, CancellationToken cancellationToken = default)
         {
@@ -25,6 +28,12 @@ namespace Bookify.Application.Abstractions.Authentication
 
                 }
             ];
+            var result = await _jwtService.GetAdminAccessTokenAsync(cancellationToken);
+
+
+            var accessToken = result.Value;
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
             var response = await _httpClient.PostAsJsonAsync(
                 "users",

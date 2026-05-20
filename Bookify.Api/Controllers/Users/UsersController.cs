@@ -1,4 +1,5 @@
-﻿using Bookify.Application.Users.GetLoggedInUser;
+﻿using Asp.Versioning;
+using Bookify.Application.Users.GetLoggedInUser;
 using Bookify.Application.Users.Login;
 using Bookify.Application.Users.Register;
 using Bookify.Infrastructure.Authorization;
@@ -9,7 +10,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace Bookify.Api.Controllers.Users
 {
     [ApiController]
-    [Route("api/Users")]
+    [ApiVersion(ApiVersions.V1)]
+    [ApiVersion(ApiVersions.V2)]
+    [Route("api/v{version:apiVersion}/Users")]
     public class UsersController(ISender sender) : ControllerBase
     {
         private readonly ISender _sender = sender;
@@ -24,6 +27,7 @@ namespace Bookify.Api.Controllers.Users
             
             return Ok(result);
         }
+
 
         [AllowAnonymous]
         [HttpPost("register")]
