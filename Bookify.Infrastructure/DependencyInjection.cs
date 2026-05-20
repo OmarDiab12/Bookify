@@ -23,6 +23,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System.Data.Common;
+using System.Net.Http;
 using AuthenticationService = Bookify.Application.Abstractions.Authentication.AuthenticationService;
 using IAuthenticationService = Bookify.Application.Abstractions.Authentication.IAuthenticationService;
 
@@ -42,6 +43,8 @@ public static class DependencyInjection
         AddAuthorization(services);
 
         AddCaching(services, configuration);
+
+        AddHealthCheck(services, configuration);
 
         return services;
     }
@@ -113,5 +116,13 @@ public static class DependencyInjection
          });
 
         services.AddScoped<ICashService, CacheService>();
+    }
+
+    private static void AddHealthCheck(IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddHealthChecks()
+            .AddSqlServer(configuration.GetConnectionString("Database")!)
+            .AddRedis(configuration.GetConnectionString("Cache")!)
+            .AddUrlGroup(new Uri(configuration["KeyCloak:BaseUrl"]!), HttpMethod.Get, "KeyCloak");
     }
 }

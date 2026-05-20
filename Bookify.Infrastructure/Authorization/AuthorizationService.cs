@@ -1,4 +1,5 @@
-﻿using Bookify.Domain.User;
+﻿using Bookify.Application.Abstractions.Caching;
+using Bookify.Domain.User;
 using Bookify.Infrastructure.Caching;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,8 +8,8 @@ namespace Bookify.Infrastructure.Authorization;
 internal sealed class AuthorizationService
 {
     private readonly ApplicationDbContext _dbContext;
-    private readonly CacheService _cache;
-    public AuthorizationService(ApplicationDbContext dbContext, CacheService cache)
+    private readonly ICashService _cache;
+    public AuthorizationService(ApplicationDbContext dbContext, ICashService cache)
     {
         _dbContext = dbContext;
         _cache = cache;
