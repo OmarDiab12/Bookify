@@ -5,7 +5,7 @@ namespace Bookify.Domain.User;
 public class User : Entity
 {
     private readonly List<Role> _roles = [];
-    //private readonly List<Permission> _permissions = [];
+    private readonly List<Permission> _permissions = [];
     private User(Guid id, FirstName firstName, LastName lastName, Email email) : base(id)
     {
         FirstName = firstName;
@@ -22,7 +22,7 @@ public class User : Entity
     public Email Email { get; private set; }
     public string IdentityId { get; private set; } = string.Empty;
     public IReadOnlyCollection<Role> Roles => [.. _roles];
-    //public IReadOnlyCollection<Permission> Permissions => [.. _permissions];
+    public IReadOnlyCollection<Permission> Permissions => [.. _permissions];
 
     public static User Create(FirstName firstName, LastName lastName, Email email)
     {

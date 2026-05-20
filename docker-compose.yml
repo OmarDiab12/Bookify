@@ -28,3 +28,21 @@ services:
 
     ports:
       - "8080:8080"
+
+  bookify-seq:
+    image: datalust/seq:2024.3
+
+    environment:
+      ACCEPT_EULA: Y
+      SEQ_FIRSTRUN_ADMINPASSWORD: Admin123!
+
+    ports:
+      - "8081:80"
+
+  bookify-redis:
+    image: redis:lastest
+    container_name: bookify.redis
+    restart: always
+    ports:
+      - '6379:6379'
+  
