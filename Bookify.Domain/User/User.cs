@@ -30,7 +30,7 @@ public class User : Entity
         user.RaiseDomainEvent(new UserCreatedDomainEvent(user.Id));
         
         user._roles.Add(Role.Registered);
-        //user._permissions.Add(Permission.UsersRead);
+        user._permissions.Add(Permission.UsersRead);
 
         return user;
     }

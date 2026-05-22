@@ -40,9 +40,9 @@ services:
       - "8081:80"
 
   bookify-redis:
-    image: redis:lastest
+    image: redis:latest
     container_name: bookify.redis
     restart: always
+
     ports:
-      - '6379:6379'
-  
+      - "6379:6379"
