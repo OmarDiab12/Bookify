@@ -1,4 +1,10 @@
-# Bookify 
+# Bookify
+
+[![build](https://github.com/OmarDiab12/Bookify/actions/workflows/ci.yml/badge.svg)](https://github.com/OmarDiab12/Bookify/actions/workflows/ci.yml)
+![.NET 8](https://img.shields.io/badge/.NET-8-512BD4?logo=dotnet)
+![Redis](https://img.shields.io/badge/Redis-cache-DC382D?logo=redis&logoColor=white)
+![Keycloak](https://img.shields.io/badge/Keycloak-auth-4D4D4D?logo=keycloak)
+![Docker](https://img.shields.io/badge/Docker-compose-2496ED?logo=docker&logoColor=white)
 
 A production-ready Apartment Booking Platform built with ASP.NET Core and modern software architecture principles including Clean Architecture, Domain-Driven Design (DDD), CQRS, Vertical Slice Architecture, and Event-Driven Design.
 
@@ -198,7 +204,7 @@ Database
 ### Clone Repository
 
 ```bash
-git clone https://github.com/your-username/bookify.git
+git clone https://github.com/OmarDiab12/Bookify.git
 ```
 
 ### Run Containers
